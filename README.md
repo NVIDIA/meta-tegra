@@ -20,6 +20,6 @@ It is intentionally separate from OE4T content branches (`master`, `wrynose`, Yo
 
 ## Sync workflow
 
-`.github/workflows/sync-upstream.yml` runs daily (and on manual dispatch) and mirrors upstream OE4T branches onto this repository, skipping `main` and `master+*`.
+`.github/workflows/sync-upstream.yml` runs every 5 minutes (and on manual dispatch) and mirrors upstream OE4T branches onto this repository, skipping `main` and `master+*`.
 
 After pushing this branch, set **Settings → General → Default branch** to `main`.

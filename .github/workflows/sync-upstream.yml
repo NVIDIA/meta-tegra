@@ -4,7 +4,7 @@ name: Sync upstream OE4T branches
 # `main` (NVIDIA control branch) and set `main` as the repository default.
 on:
   schedule:
-    - cron: "0 6 * * *" # daily 06:00 UTC
+    - cron: "*/5 * * * *" # every 5 minutes
   workflow_dispatch:
 
 permissions:
