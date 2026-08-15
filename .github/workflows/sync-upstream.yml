@@ -54,9 +54,8 @@ jobs:
           created=0
           updated=0
 
-          while IFS= read -r ref; do
-            branch="${ref#upstream/}"
-            [[ "${branch}" == "HEAD" ]] && continue
+          while IFS= read -r branch; do
+            [[ -z "${branch}" || "${branch}" == "HEAD" ]] && continue
 
             if is_protected "${branch}"; then
               echo "skip protected: ${branch}"
@@ -92,6 +91,6 @@ jobs:
             fi
             updated=$((updated + 1))
             synced=$((synced + 1))
-          done < <(git for-each-ref --format='%(refname:short)' refs/remotes/upstream/)
+          done < <(git for-each-ref --format='%(refname:strip=3)' refs/remotes/upstream/)
 
           echo "summary: synced=${synced} created=${created} updated=${updated} skipped=${skipped}"
