@@ -9,6 +9,9 @@ on:
 
 permissions:
   contents: write
+  # OE4T branches ship .github/workflows/*; pushes that touch those files
+  # require workflows write on the default GITHUB_TOKEN.
+  workflows: write
 
 concurrency:
   group: sync-upstream
@@ -35,30 +38,30 @@ jobs:
           git fetch upstream --prune
           git fetch origin --prune
 
-      - name: Mirror upstream branches to origin
+      - name: Mirror allowlisted upstream branches to origin
         shell: bash
         run: |
           set -euo pipefail
 
-          # Never overwrite NVIDIA control / integration branches.
-          # `main` hosts this workflow; `master+*` are NVIDIA-only lines.
-          is_protected() {
-            local branch="$1"
-            [[ "${branch}" == "main" ]] && return 0
-            [[ "${branch}" == master+* ]] && return 0
-            return 1
-          }
+          # Only sync these OE4T lines. Keep NVIDIA-only branches
+          # (`main`, `master+*`) out of this list.
+          BRANCHES=(
+            master
+            wrynose
+            whinlatter
+            walnascar
+            scarthgap
+            nanbield
+          )
 
           synced=0
           skipped=0
           created=0
           updated=0
 
-          while IFS= read -r branch; do
-            [[ -z "${branch}" || "${branch}" == "HEAD" ]] && continue
-
-            if is_protected "${branch}"; then
-              echo "skip protected: ${branch}"
+          for branch in "${BRANCHES[@]}"; do
+            if ! git rev-parse --verify "refs/remotes/upstream/${branch}" >/dev/null 2>&1; then
+              echo "missing upstream: ${branch}"
               skipped=$((skipped + 1))
               continue
             fi
@@ -91,6 +94,6 @@ jobs:
             fi
             updated=$((updated + 1))
             synced=$((synced + 1))
-          done < <(git for-each-ref --format='%(refname:strip=3)' refs/remotes/upstream/)
+          done
 
           echo "summary: synced=${synced} created=${created} updated=${updated} skipped=${skipped}"

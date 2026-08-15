@@ -15,11 +15,11 @@ It is intentionally separate from OE4T content branches (`master`, `wrynose`, Yo
 | Branch | Role |
 |--------|------|
 | `main` | NVIDIA control (this branch); Actions only |
-| `master`, `wrynose`, `scarthgap`, … | Mirrors of [OE4T/meta-tegra](https://github.com/OE4T/meta-tegra) |
+| `master`, `wrynose`, `whinlatter`, `walnascar`, `scarthgap`, `nanbield` | Allowlisted mirrors of [OE4T/meta-tegra](https://github.com/OE4T/meta-tegra) |
 | `master+*` | NVIDIA-only integration branches; never overwritten by sync |
 
 ## Sync workflow
 
-`.github/workflows/sync-upstream.yml` runs every 5 minutes (and on manual dispatch) and mirrors upstream OE4T branches onto this repository, skipping `main` and `master+*`.
+`.github/workflows/sync-upstream.yml` runs every 5 minutes (and on manual dispatch) and mirrors only the allowlisted OE4T branches above. Edit the `BRANCHES` array in that workflow to add or remove lines.
 
 After pushing this branch, set **Settings → General → Default branch** to `main`.
