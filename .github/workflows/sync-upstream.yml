@@ -9,9 +9,6 @@ on:
 
 permissions:
   contents: write
-  # OE4T branches ship .github/workflows/*; pushes that touch those files
-  # require workflows write on the default GITHUB_TOKEN.
-  workflows: write
 
 concurrency:
   group: sync-upstream
