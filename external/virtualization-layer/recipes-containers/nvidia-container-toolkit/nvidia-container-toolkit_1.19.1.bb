@@ -77,3 +77,5 @@ RDEPENDS:${PN} = "\
 "
 RDEPENDS:${PN}-dev += "bash make"
 PACKAGE_ARCH:tegra = "${TEGRA_PKGARCH}"
+
+CVE_PRODUCT = "nvidia:nvidia_container_toolkit"
