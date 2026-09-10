@@ -59,3 +59,5 @@ INITSCRIPT_PARAMS:${PN} = "start 10 1 2 3 4 5 . stop 90 0 6 ."
 inherit l4t_cve
 
 CVE_PRODUCT = "linaro:op-tee trustedfirmware:op-tee"
+
+CVE_STATUS[CVE-2021-36133] = "not-applicable-platform: applies to the NXP i.MX CSU driver, not Tegra"
