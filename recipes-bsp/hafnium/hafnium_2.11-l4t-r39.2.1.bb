@@ -5,7 +5,7 @@ HOMEPAGE = "https://www.trustedfirmware.org/projects/hafnium"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://hafnium/LICENSE;md5=782b40c14bad5294672c500501edc103"
 
-inherit deploy
+inherit deploy l4t_cve
 
 TEGRA_SRC_SUBARCHIVE = "Linux_for_Tegra/source/hafnium_src.tbz2"
 TEGRA_SRC_SUBARCHIVE_OPTS = "-C ${S}"
