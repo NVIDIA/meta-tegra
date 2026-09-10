@@ -9,9 +9,14 @@ require recipes-bsp/tegra-sources/tegra-sources-39.2.1.inc
 S = "${UNPACKDIR}/arm-trusted-firmware.${TARGET_SOC}"
 B = "${WORKDIR}/build"
 
-CVE_PRODUCT = "arm:arm-trusted-firmware \
+inherit l4t_cve
+
+CVE_PRODUCT = "trustedfirmware:trusted_firmware-a \
                arm:trusted_firmware-a \
-               arm:arm_trusted_firmware \
-               arm_trusted_firmware_project:arm_trusted_firmware"
+               arm:arm-trusted-firmware \
+               arm:arm_trusted_firmware"
+
+CVE_STATUS[CVE-2022-47630] = "not-applicable-config: TRUSTED_BOARD_BOOT is disabled, the vulnerable X.509 parser is not built"
+CVE_STATUS[CVE-2023-31339] = "not-applicable-platform: applies to AMD Zynq UltraScale+ MPSoC/RFSoC platform code, not Tegra"
 
 TOOLCHAIN = "gcc"

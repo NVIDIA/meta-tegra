@@ -19,10 +19,12 @@ B = "${WORKDIR}/build"
 
 COMPATIBLE_MACHINE = "(tegra234)"
 
-CVE_PRODUCT = "arm:arm-trusted-firmware \
+inherit l4t_cve
+
+CVE_PRODUCT = "trustedfirmware:trusted_firmware-a \
                arm:trusted_firmware-a \
-               arm:arm_trusted_firmware \
-               arm_trusted_firmware_project:arm_trusted_firmware"
+               arm:arm-trusted-firmware \
+               arm:arm_trusted_firmware"
 
 PACKAGECONFIG ??= "optee"
 PACKAGECONFIG[trusty] = "SPD=trusty"
